@@ -1,0 +1,138 @@
+@charset "utf-8";
+.fancybox-container {
+	z-index: 999999 !important;
+}
+.block {
+	display: block;
+}
+.inline-block {
+	display: inline-block;
+	box-sizing: border-box;
+}
+.text {
+	&-center {
+		text-align: center;
+	}
+	&-right {
+		text-align: right;
+	}
+	&-left {
+		text-align: left;
+	}
+}
+.embed-container {
+	margin-bottom: 1.5em;
+}
+.widget_search {
+	.searchform {
+		.input-group {
+			.live-search-input {
+				#s,
+				[name=s],
+				input[type=text]{
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+.top-search-form {
+	.searchform {
+		.input-group {
+			.live-search-input {
+				#s,
+				[name=s],
+				input[type=text]{
+					background-color: #ffffff;
+					color: #333333;
+				}
+			}
+		}
+	}
+}
+
+body .bvi-body[data-bvi-builtelements=true]:not(.bvi-no-styles) figure.is-layout-flex {
+	display: flex !important;
+}
+
+.bvi-widget a {
+	&,
+	&:focus,
+	&:hover {
+		color: #ffffff;
+		background-color: #3baf5a;
+    }
+}
+
+.bvi-active .bvi-body .widget_bvi_widget {
+	display: none;
+}
+
+.post-nav-top {
+	padding: 0;
+	.previous,
+	.next-post {
+		a {
+			display: flex;
+			padding: 15px;
+			margin-left: -15px;
+			margin-right: -15px;
+			transition: all .3s ease;
+			height: 100%;
+			&::before,
+			&::after {
+				font: normal normal normal 14px / 1.3 FontAwesome;
+				font-size: inherit;
+				text-rendering: auto;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				display: inline-block;
+			}
+			&:hover,
+			&:focus {
+				background-color: #3baf5a;
+				color: #ffffff;
+			}
+		}
+	}
+	.previous {
+		i.fa {
+			display: none !important;
+		}
+		a[rel=prev] {
+			justify-content: left;
+			&::before {
+				content: "\f0a8";
+				margin-right: 5px;
+			}
+		}
+	}
+	.next-post {
+		i.fa {
+			display: none !important;
+		}
+		a[rel=next] {
+			justify-content: right;
+			&::after {
+				content: "\f0a9";;
+				margin-left: 5px;
+			}
+		}
+	}
+	@media (max-width: 767px) {
+		.previous {
+			text-align: left;
+		}
+		.next-post {
+			text-align: right;
+		}
+	}
+}
+.widget_bvi_widget {
+	.bvi-widget {
+		&,
+		a {
+			display: block;
+		}
+	}
+}
