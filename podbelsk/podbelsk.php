@@ -58,21 +58,14 @@ register_deactivation_hook( __FILE__, 'deactivate_podbelsk' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-// require plugin_dir_path( __FILE__ ) . 'includes/class-podbelsk.php';
 
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
 function run_podbelsk() {
-
-	// $plugin = new Podbelsk();
-	// $plugin->run();
-
+	//
+	require_once(dirname(__FILE__) . '/Video.php');
+	require_once(dirname(__FILE__) . '/WpRunClass.php');
+	require_once(dirname(__FILE__) . '/RegisterStyleScript.php');
+	require_once(dirname(__FILE__) . '/YandexFormCode.php');
+	require_once(dirname(__FILE__) . '/GalleryShortCode.php');
+	require_once(dirname(__FILE__) . '/VideoShortCode.php');
 }
 run_podbelsk();

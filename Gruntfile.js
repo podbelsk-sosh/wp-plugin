@@ -36,10 +36,9 @@ module.exports = function(grunt) {
 			},
 			appjs: {
 				src: [
-					//"bower_components/fancybox/src/js/core.js",
+					"bower_components/fancybox/src/js/core.js",
 					// обработка ссылок на видео
 					// YouTube, RUTUBE, Viemo
-					'src/core.js',
 					'src/media.js',
 					"bower_components/fancybox/src/js/guestures.js",
 					"bower_components/fancybox/src/js/slideshow.js",
@@ -48,13 +47,13 @@ module.exports = function(grunt) {
 					"bower_components/fancybox/src/js/hash.js",
 					"bower_components/fancybox/src/js/wheel.js",
 				],
-				dest: 'dest/jquery.fancybox.js'
+				dest: 'podbelsk/js/jquery.fancybox.js'
 			},
 			main: {
 				src: [
 					'src/main.js'
 				],
-				dest: 'dest/main.js'
+				dest: 'podbelsk/js/main.js'
 			},
 			css: {
 				src: [
@@ -79,10 +78,10 @@ module.exports = function(grunt) {
 						expand: true,
 						flatten : true,
 						src: [
-							'dest/jquery.fancybox.js',
-							'dest/main.js'
+							'podbelsk/js/jquery.fancybox.js',
+							'podbelsk/js/main.js'
 						],
-						dest: path.normalize(path.join(__dirname, 'dest')),
+						dest: path.normalize(path.join(__dirname, 'podbelsk', 'js')),
 						filter: 'isFile',
 						rename: function (dst, src) {
 							return path.normalize(path.join(dst, src.replace('.js', '.min.js')));
@@ -125,8 +124,8 @@ module.exports = function(grunt) {
 		group_css_media_queries: {
 			group: {
 				files: {
-					'dest/main.css': ['test/css/prefix.main.css'],
-					'dest/jquery.fancybox.css': ['test/css/prefix.jquery.fancybox.css']
+					'podbelsk/css//main.css': ['test/css/prefix.main.css'],
+					'podbelsk/css//jquery.fancybox.css': ['test/css/prefix.jquery.fancybox.css']
 				}
 			}
 		},
@@ -137,8 +136,8 @@ module.exports = function(grunt) {
 			},
 			minify: {
 				files: {
-					'dest/main.min.css' : ['dest/main.css'],
-					'dest/jquery.fancybox.min.css' : ['dest/jquery.fancybox.css']
+					'podbelsk/css/main.min.css' : ['podbelsk/css/main.css'],
+					'podbelsk/css/jquery.fancybox.min.css' : ['podbelsk/css/jquery.fancybox.css']
 				}
 			}
 		}

@@ -59,13 +59,13 @@
 		},
 
 		rutube: {
-			matcher: /^.+rutube.ru\/video\/(.*\/)?([\w]+)(.*)\/?/,
+			matcher: /^.+rutube.ru\/(?:video|shorts)\/(\w+)\/?/,
 			params: {
 				frameBorder: 0,
 			},
 			paramPlace: 1,
 			type: 'iframe',
-			url: 'https://rutube.ru/play/embed/$2',
+			url: 'https://rutube.ru/play/embed/$1',
 		},
 
 		instagram: {
@@ -195,14 +195,6 @@
 			}
 
 			rez = url.match(providerOpts.matcher);
-
-			/*if(!rez) {
-				let turl = url.match(/\.(pdf)((\?|#).*)?$/i);
-				if(turl){
-					type = 'iframe';
-					rez = turl;
-				}
-			}*/
 
 			if (!rez) {
 				return;
@@ -380,6 +372,8 @@
 						}
 						break;
 					case 'rutube':
+						// Здесь проверить
+						console.log("RuTube");
 						break;
 				}
 			}
