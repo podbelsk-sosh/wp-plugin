@@ -39,20 +39,16 @@ define( 'PODBELSK_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-podbelsk-activator.php
  */
 function activate_podbelsk() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-podbelsk-activator.php';
-	Podbelsk_Activator::activate();
+	// Podbelsk_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-podbelsk-deactivator.php
  */
 function deactivate_podbelsk() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-podbelsk-deactivator.php';
-	Podbelsk_Deactivator::deactivate();
+	// Podbelsk_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_podbelsk' );
@@ -62,7 +58,7 @@ register_deactivation_hook( __FILE__, 'deactivate_podbelsk' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-podbelsk.php';
+// require plugin_dir_path( __FILE__ ) . 'includes/class-podbelsk.php';
 
 /**
  * Begins execution of the plugin.
@@ -75,8 +71,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-podbelsk.php';
  */
 function run_podbelsk() {
 
-	$plugin = new Podbelsk();
-	$plugin->run();
+	// $plugin = new Podbelsk();
+	// $plugin->run();
 
 }
 run_podbelsk();
