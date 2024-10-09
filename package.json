@@ -27,8 +27,7 @@
 		"grunt-group-css-media-queries": "^1.0.1",
 		"grunt-replace": "^2.0.1",
 		"load-grunt-tasks": "^5.1.0",
-		"md5": "^2.3.0",
-		"time-grunt": "git+https://github.com/ProjectSoft-STUDIONIONS/time-grunt.git"
+		"md5": "^2.3.0"
 	},
 	"dependencies": {
 		"dotenv": "^16.4.5",

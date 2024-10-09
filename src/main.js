@@ -1,11 +1,10 @@
 !(function($){
-
 	RegExp.escape = function(string) {
 		return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
 	};
-
 	/**
-	 * Default options Fancybox
+	 * Дефолтные настройки Fancybox
+	 * Добавляем Русский язык
 	**/
 	$.fancybox.defaults.i18n.ru = {
 		CLOSE: "Закрыть",
@@ -23,84 +22,105 @@
 	$.fancybox.defaults.transitionEffect = "circular";
 	$.fancybox.defaults.transitionDuration = 500;
 	$.fancybox.defaults.lang = "ru";
-/*
-	$(document, 'a').on('click', (e) => {
-		const reg = new RegExp("^" + RegExp.escape(window.location.origin +"/") + '.+\\.(pdf|xlsx)$', 'i');
-		let a = e.target,
-			href = a.href,
-			m;
-		if((m = reg.exec(href)) !== null){
-			e.preventDefault();
-			let cs = m[1].toLowerCase(),
-				options = {}.
-				go = "";
-			switch(cs) {
-				case "pdf":
-					go = window.location.origin + '/viewer/pdf_viewer/?file=' + href;
-					options = {
-						src: go,
-						toolbar: true,
-						smallBtn: false,
-						buttons: [
-							"close"
-						],
-						opts : {
-							afterShow : function( instance, current ) {
-
-							},
-							afterLoad : function( instance, current ) {
-
-							},
-						}
-					};
-					$.fancybox.open(options);
-					break;
-				case "xlsx":
-					go = window.location.origin + '/viewer/xlsx_viewer/?file=' + href;
-					options = {
-						src: go,
-						toolbar: true,
-						smallBtn: false,
-						buttons: [
-							"close"
-						],
-						opts : {
-							afterShow : function( instance, current ) {
-
-							},
-							afterLoad : function( instance, current ) {
-
-							},
-						}
-					};
-					$.fancybox.open(options);
-					break;
-			}
-			return !1;
-		}
-	});
-	$(document,'figure.wp-block-image > a ').on('click', (e) => {
-		let target = e.target.nodeName == "A" ? $(e.target) : $(e.target).closest('a');
-		if (target[0] && !target[0].hasAttribute("data-fancybox")) {
-			e.preventDefault();
-			let href = target[0].href;
-			let options = {
-				src: href,
-				toolbar: true,
-				smallBtn: false,
-				buttons: [
-					"close"
-				],
-				opts : {
-					afterShow : function( instance, current ) {
-					},
-					afterLoad : function( instance, current ) {
-					},
+	/**
+	 * Клик на ссылках документов
+	 * pdf, xlsx
+	 */
+	$(document).on('click', "a[href$='.pdf'], a[href$='.xlsx']", e => {
+		let target = e.target.nodeName == "A" ? $(e.target) : $(e.target).closest('a'),
+			base = window.location.origin + '/',
+			reg = new RegExp("^" + base),
+			href, test, arr, ext, options;
+		/**
+		 * Если существует
+		 */
+		if (target[0]) {
+			href = target[0].href;
+			/**
+			 * Если проходит регулярку
+			 */
+			if(reg.test(href)){
+				arr = href.split('.');
+				ext = arr.at(-1).toLowerCase();
+				test = href.replace(base, "/");
+				switch (ext){
+					case "pdf":
+						options = {
+							src: window.location.origin + '/viewer/pdf_viewer/?file=' + test,
+							toolbar: true,
+							smallBtn: false,
+							buttons: [
+								"close"
+							],
+							opts : {
+								afterShow : function( instance, current ) {
+									/** Если нужно какое-то действие */
+								},
+								afterLoad : function( instance, current ) {
+									/** Если нужно какое-то действие */
+								},
+							}
+						};
+						console.log(options.src);
+						/**
+						 * Открываем fancybox
+						 */
+						e.preventDefault();
+						$.fancybox.open(options);
+						return !1;
+						break;
+					// Здесь РАЗОБРАТЬСЯ. Не правильно вставляется ссылка в iframe
+					case "xlsx":
+					/**
+						options = {
+							src: window.location.origin + '/viewer/xlsx_viewer/?file=' + test,
+							toolbar: true,
+							smallBtn: false,
+							buttons: [
+								"close"
+							],
+							opts : {
+								afterShow : function( instance, current ) {},
+								afterLoad : function( instance, current ) {},
+							}
+						};
+						console.log(options.src);
+						// Открываем fancybox
+						e.preventDefault();
+						$.fancybox.open(options);
+						return !1;
+					*/
+						break;
 				}
-			};
-			$.fancybox.open(options);
-			return !1;
+			}
+		}
+	})
+	/**
+	 * Клик на ссылке изображения в контенте
+	 */
+	.on('click', ".entry-content a[href$='.jpg'], .entry-content a[href$='.jpeg'], .entry-content a[href$='.png'], .entry-content a[href$='.gif'], .entry-content a[href$='.webp']", e => {
+		let target = e.target.nodeName == "A" ? $(e.target) : $(e.target).closest('a');
+		/**
+		 * Если существует
+		 * и нет атрибута data-fancybox
+		 */
+		if (target[0] && (typeof target.data("fancybox") !== "string")) {
+			let base = window.location.origin,
+				reg = new RegExp("^" + base),
+				href = target[0].href;
+			/**
+			 * Если проходит регулярку
+			 */
+			if(reg.test(href)){
+				/**
+				 * Открываем fancybox
+				 */
+				e.preventDefault();
+				$.fancybox.open({
+					src: href
+				});
+				return !1;
+			}
 		}
 	});
-*/
 }(jQuery));
