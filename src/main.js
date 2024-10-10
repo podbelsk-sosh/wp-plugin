@@ -71,6 +71,7 @@
 						break;
 					// Здесь РАЗОБРАТЬСЯ. Не правильно вставляется ссылка в iframe
 					case "xlsx":
+						
 					/**
 						options = {
 							src: window.location.origin + '/viewer/xlsx_viewer/?file=' + test,
