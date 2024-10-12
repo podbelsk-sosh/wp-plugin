@@ -97,4 +97,11 @@
 			}
 		}
 	});
+	$(".entry-content .wp-block-gallery").each((index, element, array) => {
+		let $imgs = $("img", $(element));
+		$imgs.each((i, e, a) => {
+			let $img = $(e);
+			console.log($img.closest('a'));
+		});
+	});
 }(jQuery));

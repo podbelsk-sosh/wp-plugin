@@ -59,7 +59,73 @@ register_deactivation_hook( __FILE__, 'deactivate_podbelsk' );
  * admin-specific hooks, and public-facing site hooks.
  */
 
+if ( ! function_exists( 'twentyfourteen_posted_on' ) ) :
+	/**
+	 * Print HTML with meta information for the current post-date/time and author.
+	 *
+	 * @since Twenty Fourteen 1.0
+	 */
+	function twentyfourteen_posted_on() {
+		if ( is_sticky() && is_home() && ! is_paged() ) {
+			echo '<span class="featured-post">' . __( 'Sticky', 'twentyfourteen' ) . '</span>';
+		}
+
+		// Set up and print post meta information.
+		printf(
+			'<span class="entry-date"><a href="%1$s" rel="bookmark"><time class="entry-date" datetime="%2$s">%3$s</time></a></span>',
+			esc_url( get_permalink() ),
+			esc_attr( get_the_date( 'c' ) ),
+			esc_html( get_the_date() )
+		);
+	}
+endif;
+
 function run_podbelsk() {
+	//
+	remove_action( 'do_feed_rdf',  'do_feed_rdf',  10, 1 );
+	remove_action( 'do_feed_rss',  'do_feed_rss',  10, 1 );
+	// remove_action( 'do_feed_rss2', 'do_feed_rss2', 10, 1 );
+	remove_action( 'do_feed_atom', 'do_feed_atom', 10, 1 );
+
+	//
+	add_action( 'wp', function(){
+		remove_action('wp_head', 'parent_post_rel_link', 10, 0); // prev link
+		remove_action('wp_head', 'start_post_rel_link', 10, 0); // start link
+		remove_action('wp_head', 'wp_generator');
+		remove_action('wp_head', 'feed_links_extra', 3);
+		// remove_action('wp_head', 'feed_links', 2);
+		remove_action('wp_head', 'rsd_link');
+
+		remove_action('wp_head', 'wlwmanifest_link');
+		remove_action('wp_head', 'index_rel_link');
+		remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0);
+		remove_action('wp_head', 'wp_oembed_add_discovery_links');
+
+		remove_action('wp_head', 'rel_canonical');
+		remove_action('wp_head', 'rest_output_link_wp_head');
+
+		// Emoji
+		remove_action('wp_print_styles', 'print_emoji_styles');
+		remove_action('admin_print_scripts', 'print_emoji_detection_script');
+		remove_action('admin_print_styles', 'print_emoji_styles');
+		// remove_action('template_redirect', 'rest_output_link_header', 11, 0);
+		remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+		remove_filter('the_content_feed', 'wp_staticize_emoji');
+		remove_filter('comment_text_rss', 'wp_staticize_emoji');
+	});
+
+	function podbelsk_admin_footer () {
+		$footer_text = array(
+			'GitHub:&nbsp;<a href="https://github.com/podbelsk-sosh" target="_blank">https://github.com/podbelsk-sosh</a>',
+			'Поддержка:&nbsp;<a href="https://github.com/ProjectSoft-STUDIONIONS" target="_blank">ProjectSoft</a>',
+			'Тел.:&nbsp;<a href="tel:+79376445464" target="_blank">+7(937)644-54-64</a>',
+			'Email:&nbsp;<a href="mailto:projectsoft2009@yandex.ru?subject=Проблемы с сайтом ГБОУ СОШ имени Н. С. ДОРОВСКОГО с. ПОДБЕЛЬСК">projectsoft2009@yandex.ru</a>'
+		);
+		return implode( ' • ', $footer_text);
+	}
+	 
+	add_filter('admin_footer_text', 'podbelsk_admin_footer');
+
 	//
 	require_once(dirname(__FILE__) . '/Video.php');
 	require_once(dirname(__FILE__) . '/WpRunClass.php');
@@ -68,4 +134,15 @@ function run_podbelsk() {
 	require_once(dirname(__FILE__) . '/GalleryShortCode.php');
 	require_once(dirname(__FILE__) . '/VideoShortCode.php');
 }
+
 run_podbelsk();
+
+// Собственный RSS
+// add_action('init', 'customRSS');
+// function customRSS(){
+// 	add_feed('rssfeed', 'customRSSFunc');
+// }
+// function customRSSFunc(){
+// 	// load_template( dirname( __FILE__ ) . '/rss.php' );
+// 	include(dirname( __FILE__ ) . '/rss.php');
+// }
