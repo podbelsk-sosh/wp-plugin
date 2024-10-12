@@ -29,12 +29,10 @@ html {
 	z-index: 9999999 !important;
 }
 
-figure {
-	&.wp-block-image {
-		> a {
-			> img {
-				//pointer-events: none;
-			}
-		}
-	}
+.fancybox-content.xlsx_viewer,
+.fancybox-content.docx_viewer {
+	height: 100% !important;
+	overflow: visible;
+	padding: 0;
+	width: 100% !important;
 }

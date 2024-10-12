@@ -28,3 +28,11 @@ html {
 .fancybox-container {
   z-index: 9999999 !important;
 }
+
+.fancybox-content.xlsx_viewer,
+.fancybox-content.docx_viewer {
+  height: 100% !important;
+  overflow: visible;
+  padding: 0;
+  width: 100% !important;
+}

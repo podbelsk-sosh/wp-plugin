@@ -30,7 +30,7 @@
 		let target = e.target.nodeName == "A" ? $(e.target) : $(e.target).closest('a'),
 			base = window.location.origin + '/',
 			reg = new RegExp("^" + base),
-			href, test, arr, ext, options;
+			href, arr, ext, options, url;
 		/**
 		 * Если существует
 		 */
@@ -42,56 +42,30 @@
 			if(reg.test(href)){
 				arr = href.split('.');
 				ext = arr.at(-1).toLowerCase();
-				test = href.replace(base, "/");
-				switch (ext){
-					case "pdf":
-						options = {
-							src: window.location.origin + '/viewer/pdf_viewer/?file=' + test,
-							toolbar: true,
-							smallBtn: false,
-							buttons: [
-								"close"
-							],
-							opts : {
-								afterShow : function( instance, current ) {
-									/** Если нужно какое-то действие */
-								},
-								afterLoad : function( instance, current ) {
-									/** Если нужно какое-то действие */
-								},
-							}
-						};
-						console.log(options.src);
-						/**
-						 * Открываем fancybox
-						 */
-						e.preventDefault();
-						$.fancybox.open(options);
-						return !1;
-						break;
-					// Здесь РАЗОБРАТЬСЯ. Не правильно вставляется ссылка в iframe
-					case "xlsx":
-					/**
-						options = {
-							src: window.location.origin + '/viewer/xlsx_viewer/?file=' + test,
-							toolbar: true,
-							smallBtn: false,
-							buttons: [
-								"close"
-							],
-							opts : {
-								afterShow : function( instance, current ) {},
-								afterLoad : function( instance, current ) {},
-							}
-						};
-						console.log(options.src);
-						// Открываем fancybox
-						e.preventDefault();
-						$.fancybox.open(options);
-						return !1;
-					*/
-						break;
-				}
+				url = window.location.origin + `/viewer/${ext}_viewer/?file=` + encodeURI(href);
+				options = {
+					src: url,
+					toolbar: true,
+					smallBtn: false,
+					buttons: [
+						"close"
+					],
+					opts : {
+						afterShow : function( instance, current ) {
+							$('.fancybox-content').addClass(ext == "xlsx" ? 'xlsx_viewer' : 'docx_viewer')
+						},
+						afterLoad : function( instance, current ) {
+							$('.fancybox-content').addClass(ext == "xlsx" ? 'xlsx_viewer' : 'docx_viewer')
+						},
+					}
+				};
+				console.log(options.src);
+				/**
+				 * Открываем fancybox
+				 */
+				e.preventDefault();
+				$.fancybox.open(options);
+				return !1;
 			}
 		}
 	})
