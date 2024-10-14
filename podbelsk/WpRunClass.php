@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 // Класс отключения/включения чего либо )))
 class WpRunClass {
 	static function init() {

@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 $_wp_additional_image_sizes['podbelsk-size'] = array(
 	'width'  => absint( 500 ),
 	'height' => absint( 0 ),

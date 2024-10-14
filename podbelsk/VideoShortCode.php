@@ -1,9 +1,14 @@
 <?php
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 // Класс вывода галлерей video
 class VideoShortCode {
 	static function init(){
 		add_shortcode( 'video', array(__CLASS__, 'ps_video_function') );
 	}
+
 	static function ps_video_function($atts){
 		global $post;
 		if($atts["links"]):

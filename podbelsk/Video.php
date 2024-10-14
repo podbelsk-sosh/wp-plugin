@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 /**
  * Класс получения информации о видео на Rutube, YouTube
 */

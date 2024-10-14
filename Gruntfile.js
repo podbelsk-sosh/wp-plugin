@@ -1,8 +1,5 @@
 module.exports = function(grunt) {
-	require('dotenv').config();
-	const DEBUG = parseInt(process.env.DEBUG) || false;
-	var fs = require('fs'),
-		path = require('path'),
+	var path = require('path'),
 		gc = {
 			default: [
 				"clean:all",
@@ -25,8 +22,9 @@ module.exports = function(grunt) {
 				force: true
 			},
 			all: [
-				'test/',
-				'tests/'
+				'podbelsk/js/',
+				'podbelsk/css/',
+				'test/'
 			]
 		},
 		concat: {
@@ -98,6 +96,9 @@ module.exports = function(grunt) {
 				files : {
 					'test/css/main.css' : [
 						'src/main.less'
+					],
+					'test/css/admin.css' : [
+						'src/admin.less'
 					]
 				}
 			}
@@ -111,10 +112,13 @@ module.exports = function(grunt) {
 			},
 			css: {
 				files: {
-					'test/css/prefix.main.css' : [
+					'test/css/main.css' : [
 						'test/css/main.css'
 					],
-					'test/css/prefix.jquery.fancybox.css' : [
+					'test/css/admin.css' : [
+						'test/css/admin.css'
+					],
+					'test/css/jquery.fancybox.css' : [
 						'test/css/jquery.fancybox.css'
 					],
 				}
@@ -123,8 +127,15 @@ module.exports = function(grunt) {
 		group_css_media_queries: {
 			group: {
 				files: {
-					'podbelsk/css//main.css': ['test/css/prefix.main.css'],
-					'podbelsk/css//jquery.fancybox.css': ['test/css/prefix.jquery.fancybox.css']
+					'podbelsk/css//main.css': [
+						'test/css/main.css'
+					],
+					'podbelsk/css//admin.css': [
+						'test/css/admin.css'
+					],
+					'podbelsk/css//jquery.fancybox.css': [
+						'test/css/jquery.fancybox.css'
+					]
 				}
 			}
 		},
@@ -136,6 +147,7 @@ module.exports = function(grunt) {
 			minify: {
 				files: {
 					'podbelsk/css/main.min.css' : ['podbelsk/css/main.css'],
+					'podbelsk/css/admin.min.css' : ['podbelsk/css/admin.css'],
 					'podbelsk/css/jquery.fancybox.min.css' : ['podbelsk/css/jquery.fancybox.css']
 				}
 			}

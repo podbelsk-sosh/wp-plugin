@@ -74,21 +74,15 @@
 	 */
 	.on('click', ".entry-content a[href$='.jpg'], .entry-content a[href$='.jpeg'], .entry-content a[href$='.png'], .entry-content a[href$='.gif'], .entry-content a[href$='.webp']", e => {
 		let target = e.target.nodeName == "A" ? $(e.target) : $(e.target).closest('a');
-		/**
-		 * Если существует
-		 * и нет атрибута data-fancybox
-		 */
+		// Если существует
+		// и нет атрибута data-fancybox
 		if (target[0] && (typeof target.data("fancybox") !== "string")) {
 			let base = window.location.origin,
 				reg = new RegExp("^" + base),
 				href = target[0].href;
-			/**
-			 * Если проходит регулярку
-			 */
+			// Если проходит регулярку
 			if(reg.test(href)){
-				/**
-				 * Открываем fancybox
-				 */
+				// Открываем fancybox
 				e.preventDefault();
 				$.fancybox.open({
 					src: href
@@ -97,11 +91,24 @@
 			}
 		}
 	});
-	$(".entry-content .wp-block-gallery").each((index, element, array) => {
-		let $imgs = $("img", $(element));
-		$imgs.each((i, e, a) => {
-			let $img = $(e);
-			console.log($img.closest('a'));
+	/*
+	$("#content article").each((index, element, array) => {
+		let id = $(element).attr("id");
+		$(".wp-block-image img", element).each((i, e, a) => {
+			let lnk = $(e).closest("a");
+			if(lnk.length){
+				lnk.each((li, le, la) => {
+					le.setAttribute("data-fancybox", id);
+				});
+			}else{
+				lnk = $("<a></a>");
+				lnk.attr({
+					"href": $(e).attr("data-src"),
+					"data-fancybox": id
+				});
+				$(e).wrap(lnk);
+			}
 		});
 	});
+	*/
 }(jQuery));

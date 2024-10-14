@@ -81,6 +81,19 @@ if ( ! function_exists( 'twentyfourteen_posted_on' ) ) :
 endif;
 
 function run_podbelsk() {
+
+	function podbelsk_admin_footer () {
+		$footer_text = array(
+			'GitHub:&nbsp;<a href="https://github.com/podbelsk-sosh" target="_blank">https://github.com/podbelsk-sosh</a>',
+			'Поддержка:&nbsp;<a href="https://github.com/ProjectSoft-STUDIONIONS" target="_blank">ProjectSoft</a>',
+			'Тел.:&nbsp;<a href="tel:+79376445464" target="_blank">+7(937)644-54-64</a>',
+			'Email:&nbsp;<a href="mailto:projectsoft2009@yandex.ru?subject=Проблемы с сайтом ГБОУ СОШ имени Н. С. ДОРОВСКОГО с. ПОДБЕЛЬСК">projectsoft2009@yandex.ru</a>'
+		);
+		return implode( ' • ', $footer_text);
+	}
+	 
+	add_filter('admin_footer_text', 'podbelsk_admin_footer');
+
 	//
 	remove_action( 'do_feed_rdf',  'do_feed_rdf',  10, 1 );
 	remove_action( 'do_feed_rss',  'do_feed_rss',  10, 1 );
@@ -114,18 +127,6 @@ function run_podbelsk() {
 		remove_filter('comment_text_rss', 'wp_staticize_emoji');
 	});
 
-	function podbelsk_admin_footer () {
-		$footer_text = array(
-			'GitHub:&nbsp;<a href="https://github.com/podbelsk-sosh" target="_blank">https://github.com/podbelsk-sosh</a>',
-			'Поддержка:&nbsp;<a href="https://github.com/ProjectSoft-STUDIONIONS" target="_blank">ProjectSoft</a>',
-			'Тел.:&nbsp;<a href="tel:+79376445464" target="_blank">+7(937)644-54-64</a>',
-			'Email:&nbsp;<a href="mailto:projectsoft2009@yandex.ru?subject=Проблемы с сайтом ГБОУ СОШ имени Н. С. ДОРОВСКОГО с. ПОДБЕЛЬСК">projectsoft2009@yandex.ru</a>'
-		);
-		return implode( ' • ', $footer_text);
-	}
-	 
-	add_filter('admin_footer_text', 'podbelsk_admin_footer');
-
 	//
 	require_once(dirname(__FILE__) . '/Video.php');
 	require_once(dirname(__FILE__) . '/WpRunClass.php');
@@ -133,6 +134,9 @@ function run_podbelsk() {
 	require_once(dirname(__FILE__) . '/YandexFormCode.php');
 	require_once(dirname(__FILE__) . '/GalleryShortCode.php');
 	require_once(dirname(__FILE__) . '/VideoShortCode.php');
+	require_once(dirname(__FILE__) . '/WpEmbededRun.php');
+	require_once(dirname(__FILE__) . '/WpBashBoardWidgets.php');
+	
 }
 
 run_podbelsk();

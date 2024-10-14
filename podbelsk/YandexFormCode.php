@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 // Класс вывода Яндекс форм
 class YandexFormCode {
 
